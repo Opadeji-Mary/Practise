@@ -1,0 +1,44 @@
+.all{
+    /* border: 10px;
+    border-width: 50px;
+    border-color: red;
+    border-style: inset;
+    border-radius: 900vh; */
+    /* border-image: auto; */
+}
+.log{
+    
+}
+.home{
+   display: flex;
+   justify-self: 50px;
+   grid-column-gap: 3pc;
+   margin-left: auto;
+}
+.dip{
+  display: flex;
+  align-self: left;
+}
+.transition{
+  position: absolute;
+  left: 50%;
+  width: 0%;
+  transform: translate(-50%);
+  background: transparent;
+  transition:all 0.3s ease;
+  animation: animate 0.2s linear 1 forwards;
+}
+@keyframes animate {
+  100%{
+    transition: all 0.3s ease;
+    width: 50%;
+  }
+}
+@media (max-width:688px) {
+  @keyframes animate {
+    100%{
+      transition: all 0.3s ease;
+      width: 90%;
+    }
+  }
+}

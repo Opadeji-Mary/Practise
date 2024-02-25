@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="dash.css">
+</head>
+<body style="background-image: linear-gradient(yellow, white); background-repeat: no-repeat; height: 100vh;">
+   <div class="all">
+    <h1 style="color: red;">Mpay</h1>
+    <center>
+<div class="form-control border border-5 border-shadow">
+    <h1>SIGN UP</h1>
+    <input type="text" placeholder="first name" id="frn"> <br>
+    <input type="text" placeholder="second name" id="lan"> <br>
+    <input type="text" placeholder="email" id="ema"><br>    
+    <input type="text" placeholder="middle name" id="mn"> <br>
+    <input type="text" placeholder="phone number" id="pn"> <br>
+    <input type="text" placeholder="Addres" id="add"> <br>
+    <input type="text" placeholder="DOB" id="dob"> <br>
+    <input type="text" placeholder="BVN" id="bvn"> <br>
+    <input type="text" placeholder="pin" id="pin"> <br>
+    <input type="password;" placeholder="password" id="paw"> <br>
+    <input type="file" placeholder="profilePic" id="pp"> <br>
+    <button onclick="signup()">Sign Up</button>
+</div>
+    <div id="display"></div>
+   </div>
+    </center>
+    <script>
+        var allUsers=[]
+        if(localStorage.thispage){
+            let getBack=JSON.parse(localStorage.getItem('thispage'))
+            thispage=getBack
+        }
+        function signup(){
+            var eachUsers = {
+                firstname:frn.value,
+                lastname:lan.value,
+                email:ema.value,
+                middlename:mn.value,
+                phoneno:pn.value,
+                address:add.value,
+                dateOfBirth:dob.value,
+                BVN:bvn.value,
+                pin:pin.value,
+                password:paw.value,
+                profilePic:pp.value,
+                balance:500
+            }
+            
+            allUsers.push(eachUsers)
+            console.log(allUsers)
+            localStorage.setItem("thispage",JSON.stringify(allUsers))
+            window.location.href="signin.html"
+            
+
+            if(frn.value == "" || lan.value == "" || ema.value == "" || mn.value == "" || pn.value=="" || pn.value==""|| add.value=="" || dob.value=="" ||
+             bvn.value=="" || pin.value=="" || paw.value=="" || pp.value==""){
+            alert("ENTER YOUR INPUT")
+        }
+        else{
+
+            var eachUsers = {
+                firstname:frn.value,
+                lastname:lan.value,
+                email:ema.value,
+                middlename:mn.value,
+                phoneno:pn.value,
+                address:add.value,
+                dateOfBirth:dob.value,
+                BVN:bvn.value,
+                pin:pin.value,
+                password:paw.value,
+                profilePic:pp.value,
+                
+            }
+            // allUsers.push(eachUsers)
+            // console.log(allUsers)
+            // localStorage.setItem("thispage",JSON.stringify(allUsers))
+            // window.location.href="signin.html"
+        }}
+            //     console.log(localStorage.setItem('frn.value','lan.value','ema.value','paw.value'))
+        //     localStorage.setItem("Address",frn.value,
+        //     lan.value,
+        //     ema.value,
+        //     paw.value,)
+        
+        // const myImg = document.querySelector("img")
+        // myImg.src = "sun.jpg";
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="dash.css">
+</head>
+
+<body style="background-image: linear-gradient(white,purple); background-repeat: no-repeat; height: 100vh;">
+    <div class="dip">
+        <h1 style="color: red;">Mpay</h1>
+        <ul class="home">
+            <li>Home</li>
+            <li>About</li>
+            <li>More</li>
+        </ul>
+    </div>
+    <h3 id="amount">Total balance</h3>
+    <div id="ccbalance"></div>
+    <marquee behavior="" direction="">
+        <h1>Transfer, Withdraw And Deposit</h1>
+    </marquee>
+    <button style="background-color: pink;" onclick="Transfer()" id="transer">Transfer</button>
+    <!-- <button style="background-color: pink;" onclick="withdraw()" id="withdraw">Withdraw</button> -->
+    <button style="background-color: pink;" onclick="deposit()" id="userdep">Desposit</button>
+    <hr>
+    <button id="his" onclick="history()" style="color: blueviolet; background-color: black;">Transtraction
+        History</button>
+    <div id="display"></div>
+    <div id="posit"></div>
+    <script>
+        let getUser = JSON.parse(localStorage.getItem('thispage'))
+        let oneuser = localStorage.getItem('eachuser')
+        // getUser[oneuser].balance+=500
+        console.log(getUser[oneuser]);
+        amount.innerHTML = "Total balance " + getUser[oneuser].balance
+        const Transfer = () => {
+            display.innerHTML = `
+               <div class="transition shadow p-5 rounded border-top border-end border-red ">
+                  <div class="nav na-bar">
+                           <h5 class="text-center text-muted display-12">Transfer</h5>
+                         <div class="row">
+                         <input class="form-control mb-3" type="text" placeholder="Acc/No" id="an">
+                         <input class="form-control mb-3" type="text" placeholder="Amount" id="am">
+                         <input class="form-control mb-3" type="text" placeholder="Remark" id="re">
+                         <input  class="form-control mb-3"type="text" placeholder="category" id="ct">
+                         <button onclick="send()">send</button>
+                       </div>    
+                    </div>
+                </div>`
+
+        }
+        const send = () => {
+            getUser[oneuser].balance -= am.value
+            amount.innerHTML = "Total balance " + getUser[oneuser].balance
+            localStorage.setItem("thispage", JSON.stringify(getUser))
+            var se = {
+                account: an.value,
+                amount: am.value,
+                remark: re.value,
+                category: ct.value
+            }
+            allUser.splice(set, 1, se)
+            his.innerHTML = `${allUser}`
+        }
+        const history = () => {
+            // allUsers = []
+            // allUsers.push(allUsers)
+            display.innerHTML = `
+            <div class="border border-white border-5">
+            <h5>
+            <thead>
+            <th class="with">S/N</th>
+            <th class="with">SenderName</th>
+            <th class="with">Amount</th>
+            <th class="with">Bank Name</th>
+            <th class="with">Action</th>
+            </thead>
+            </h5>
+            </div>
+            `
+            var myDate = new Date()
+            console.log(myDate)
+            allUsers.push(send.value)
+            display.innerHTML = ""
+            for (let index = 0; index < allUsers.length; index++) {
+                his.innerHTML += `
+                <h5>
+                    <tr>
+                        <td class="with">${[index + 1]}</td>
+                        <td class="with">${allUsers[index].SenderName}</td>
+                        <td class="with">${allUsers[index].amount}</td>
+                        <td class="with">${allUsers[index].BankName}</td>
+                        <td class="with">${allUsers[index].Action}</td>
+                        <td class="with"><button onclick="del()" class="btn btn-danger" id="del">Delete</button>
+                        <button onclick="edit(${index})" Class="btn btn-warning" id="edit">Edit</button></td>
+                    </tr>
+                <h5/>`
+                
+            }
+        }
+        function del(){
+        allUsers.splice(0,1)
+        allUsers()
+        }
+
+        // let Deposit = []
+        // let Withdraw = []
+        // let transfer = []
+        // let allUsers = []
+        const deposit = () => {
+            display.innerHTML = `
+            <div class="transition shadow p-5 rounded border-top border-end border-red">
+            <input class="form-control mb-3" type="text" type="text">
+            <input class="form-control mb-3" type="text" type="text">
+            <select class="form-control mb-3" type="text" name="" id="">
+            <option value="Cashdep">Cash Deposit</option>
+            <option value="">Bank Transfer</option> 
+            <option value="bussd">bank USSD</option>
+            <option value="Request">Request money from others</option>
+            <option value="scan">Scan my QR Code</option>
+            <option value="">top-up with Card/Account</option>
+            </select>
+            </div>`
+            if (isNan(userdep.value)) {
+                alert("enter a number")
+            } else if (userdep.value || userdep.value > 1000) {
+                alert("ENTER A CERTAIN AMOUNT IN YOUR ACCOUNT")
+            } else (
+                totalBalance = (Number(userdep.value)),
+                AccBalance.innerHTML = `${totalBalance}`,
+                console.log(totalBalance)
+            )
+        }
+
+//         const withdraw = () => {
+//             display.innerHTML = `
+//             <!-- <div>
+//     <div>
+//         <select name="select" id="">
+//             <option value="" placeholder="SAVINGS"></option>
+//             <option value="" placeholder="CURRENT"></option>
+//         </select>
+//             <input type="text" placeholder="Amount to withdraw">
+//             <input type="text" placeholder="Remark">
+//             <button onclick="drawer()">Withdraw</button>
+//     </div>
+//  </div> -->
+//         `
+//             getUser[oneuser].withdraw -= drawer.value
+//             amount.innerHTML = "Total balance " + getUser[oneuser].withdraw
+//             localStorage.setItem("thispage", JSON.stringify(getUser))
+//         } 
+    </script>
+</body>
+</html>
